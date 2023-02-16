@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="https://nyqui.st/VillanTV" version="1.0.0" height="1080" width="1920" viewmodes="fullscreen">
+    <tizen:application id="7IrqBvOuli.VillanTV" package="7IrqBvOuli" required_version="2.1"/>
+    <author href="https://nyqui.st" email="f@nyqui.st">Filip Nyquist</author>
+    <content src="index.html"/>
+    <tizen:content-security-policy>default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline';</tizen:content-security-policy>
+    <feature name="http://tizen.org/feature/screen.size.normal.1080.1920"/>
+    <icon src="Pubsektionen_Logga.png"/>
+    <license href="https://nyqui.st">The fuck do i know?</license>
+    <name>VillanTV</name>
+    <tizen:privilege name="http://developer.samsung.com/privilege/network.public"/>
+    <tizen:profile name="tv-samsung"/>
+    <tizen:setting screen-orientation="landscape" context-menu="enable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
+</widget>

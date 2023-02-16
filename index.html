@@ -1,0 +1,151 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Html Generated</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Figma htmlGenerator">
+    <meta name="author" content="htmlGenerator">
+    <link href="https://fonts.googleapis.com/css?family=Jost&display=swap" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script type="text/javascript" src="$WEBAPIS/webapis/webapis.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class=e56_522><span class="e56_523">VillanTV by Mime and Mjupps, design by Tango</span>
+        <div class="e56_582"></div><span class="e56_585">DANSGOLVET</span><span class="e56_586">Inget spelas just nu</span><span class="e56_587"></span>
+        <div class="e56_588"></div><span class="e56_590">ÖVRE BAREN</span><span class="e56_591">Inget spelas just nu</span><span class="e56_592"></span>
+        <div class="e56_593"></div><span class="e56_596">Spelas just nu</span>
+        <div class=e59_620><span class="e56_580">Ingen mat redo att hämtas</span>
+            <div class="e56_598"></div>
+        </div>
+        <div class=e59_630>
+            <div class=e59_619>
+                <div class="e56_529"></div><span class="e56_530">015</span>
+            </div>
+            <div class=e59_618>
+                <div class="e56_532"></div><span class="e56_533">014</span>
+            </div>
+            <div class=e59_617>
+                <div class="e56_535"></div><span class="e56_536">013</span>
+            </div>
+            <div class=e59_616>
+                <div class="e56_538"></div><span class="e56_539">012</span>
+            </div>
+            <div class=e59_615>
+                <div class="e56_542"></div><span class="e56_543">011</span>
+            </div>
+            <div class=e59_614>
+                <div class="e56_545"></div><span class="e56_546">010</span>
+            </div>
+            <div class=e59_613>
+                <div class="e56_548"></div><span class="e56_549">009</span>
+            </div>
+            <div class=e59_612>
+                <div class="e56_551"></div><span class="e56_552">008</span>
+            </div>
+            <div class=e59_611>
+                <div class="e56_555"></div><span class="e56_556">007</span>
+            </div>
+            <div class=e59_610>
+                <div class="e56_558"></div><span class="e56_559">006</span>
+            </div>
+            <div class=e59_609>
+                <div class="e56_561"></div><span class="e56_562">005</span>
+            </div>
+            <div class=e59_608>
+                <div class="e56_564"></div><span class="e56_565">004</span>
+            </div>
+            <div class=e59_607>
+                <div class="e56_568"></div><span class="e56_569">003</span>
+            </div>
+            <div class=e59_606>
+                <div class="e56_571"></div><span class="e56_572">002</span>
+            </div>
+            <div class=e59_605>
+                <div class="e56_574"></div><span class="e56_575">001</span>
+            </div>
+            <div class=e59_604>
+                <div class="e56_577"></div><span class="e56_578">000</span>
+            </div>
+        </div><span class="e56_525">Färdiga matbeställningar</span><span class="e56_597">Studentpuben Villan</span>
+        <div class="e59_628"></div>
+        <div class="e59_629"></div>
+    </div>
+    <script src="js/main.js"></script>
+    <script>
+    let bricks = ["e59_604", "e59_605", "e59_606", "e59_607", "e59_608", "e59_609", "e59_610", "e59_611", "e59_612", "e59_613", "e59_614", "e59_615", "e59_616", "e59_617", "e59_618", "e59_619"]
+    function updateBricks(showedNums){
+        bricks.forEach((elemSelector, index) => {
+            console.log(index);
+            //Check if the index exists in showedNums.
+            if(showedNums[index] == undefined){
+                //Elem does not exist, hide this brick.
+                console.log("Hiding brick "+ elemSelector);
+                document.getElementsByClassName(elemSelector)[0].style.visibility = 'hidden';
+            }else{
+                //Number exists, set text and show brick.
+                document.getElementsByClassName(elemSelector)[0].children[1].textContent = showedNums[index];
+                document.getElementsByClassName(elemSelector)[0].style.visibility = '';
+                console.log("Showing brick "+ elemSelector + " with the number "+showedNums[index]);
+            }
+        })
+        //If showedNums > 0 hide food notice, else show.
+        if(showedNums.length > 0){
+        document.getElementsByClassName("e59_620")[0].style.visibility = 'hidden';
+        }else{
+        document.getElementsByClassName("e59_620")[0].style.visibility = '';
+        }
+    }
+    //updateBricks([]);
+    </script>
+    <script>
+        var socket = io.connect("http://192.168.1.9:3000");
+          	
+          	socket.on('orderUpdate', function(numArr) {
+			    console.log("Updating orders: ");
+			    console.log(numArr.curNums);
+			    updateBricks(numArr.curNums);
+  			});
+  			socket.on('spotifyUpdate', function(sdata) {
+			    console.log("Updating spotify: ");
+			    console.log(sdata);
+			    //Bar status
+			    if(sdata.bar.status == "playing"){
+			   		data = sdata.bar.data;
+			   		document.getElementsByClassName("e56_586")[0].textContent = data.title;
+			    	document.getElementsByClassName("e56_587")[0].textContent = data.by;
+			   		document.getElementsByClassName("e56_588")[0].style.backgroundImage = "url('"+data.img+"')";
+			    }else{
+			    	//We are not playing, go back to "not playing text".
+			    	document.getElementsByClassName("e56_586")[0].textContent = "Inget spelas just nu";
+			    	document.getElementsByClassName("e56_587")[0].textContent = "";
+			    	document.getElementsByClassName("e56_588")[0].style.backgroundImage = "url(images/notplaying.png)";
+			    }
+			    //Dancefloor
+			    if(sdata.dance.status == "playing"){
+			   		data = sdata.dance.data;
+			   		document.getElementsByClassName("e56_591")[0].textContent = data.title;
+			    	document.getElementsByClassName("e56_592")[0].textContent = data.by;
+			   		document.getElementsByClassName("e56_593")[0].style.backgroundImage = "url('"+data.img+"')";
+			    }else{
+			    	//We are not playing, go back to "not playing text".
+			    	document.getElementsByClassName("e56_591")[0].textContent = "Inget spelas just nu";
+			    	document.getElementsByClassName("e56_592")[0].textContent = "";
+			    	document.getElementsByClassName("e56_593")[0].style.backgroundImage = "url(images/notplaying.png)";
+			    }
+  			});
+  		webapis.appcommon.setScreenSaver(
+			  webapis.appcommon.AppCommonScreenSaverState.SCREEN_SAVER_OFF,
+			  function(result) {
+			    console.log(result);
+			  }, function(error) {
+			    console.log(JSON.stringify(error));
+			  }
+			);
+    </script>
+</body>
+
+</html>
